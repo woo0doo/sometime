@@ -38,10 +38,10 @@ public class Board extends BaseTimeEntity{
     @OneToMany(mappedBy = "board")
     private List<Comment> commentList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userlikeboard_id")
+    @OneToMany(mappedBy = "board")
     private List<UserLikeBoard> userLikeBoardList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userscrapboard_id")
+    @OneToMany(mappedBy = "board")
     private List<UserScrapBoard> userScrapBoardList = new ArrayList<>();
 
     // TODO. comment count
