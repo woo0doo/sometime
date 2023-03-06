@@ -25,7 +25,6 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uni_id")
     private Uni uni;
-    private List<Board> boardList;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL) // 일대다. 주인은 Order.
     private List<Board> boardList = new ArrayList<>();;

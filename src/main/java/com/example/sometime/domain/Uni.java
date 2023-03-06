@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@Entity
+@Table
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Uni {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
