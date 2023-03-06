@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class UserScrapBoard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_scrap_board_id")
+    @Column(name = "userlikeboard_id")
     private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -24,7 +26,6 @@ public class UserScrapBoard {
     @JoinColumn(name = "board_id")
     private Board board;
 
-    // builder
     @Builder
     public UserScrapBoard(User user, Board board) {
         this.user = user;

@@ -8,23 +8,20 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class UserLikeComment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_like_comment_id")
+    @Column(name = "userlikeboard_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id")
     private Comment comment;
 
-    // builder
     @Builder
     public UserLikeComment(User user, Comment comment) {
         this.user = user;

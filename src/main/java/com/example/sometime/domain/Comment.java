@@ -19,12 +19,13 @@ public class Comment extends BaseTimeEntity  {
     @Column(name = "comment_id")
     private Long id;
 
+
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
@@ -33,8 +34,6 @@ public class Comment extends BaseTimeEntity  {
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
     private List<UserLikeComment> userLikeCommentList = new ArrayList<>();;
-
-    // TODO. 카운트
 
     // 생성자
     @Builder

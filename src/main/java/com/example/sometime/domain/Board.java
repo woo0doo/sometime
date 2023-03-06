@@ -19,26 +19,29 @@ public class Board extends BaseTimeEntity{
     @Column(name = "board_id")
     private Long id;
 
-    @Column(length = 100)
+    @Column(name = "board_title")
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "board_content", columnDefinition = "TEXT")
     private String content;
 
     private boolean is_anonymous;
-    @ManyToOne(fetch = FetchType.LAZY)// 다대일
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
-    @ManyToOne(fetch = FetchType.LAZY)// 다대일
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL) // 일대다. 주인은 Order.
+
+    @OneToMany(mappedBy = "board")
     private List<Comment> commentList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<UserLikeBoard> userLikeBoardList= new ArrayList<>();
+    @OneToMany(mappedBy = "userlikeboard_id")
+    private List<UserLikeBoard> userLikeBoardList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userscrapboard_id")
     private List<UserScrapBoard> userScrapBoardList = new ArrayList<>();
 
     // TODO. comment count

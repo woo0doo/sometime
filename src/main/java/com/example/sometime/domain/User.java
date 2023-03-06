@@ -20,18 +20,20 @@ public class User extends BaseTimeEntity{
     @Column(name = "user_id")
     private Long id;
 
+    @Column(name = "user_name")
     private String name;
 
     @Column(unique = true, length = 10)
     private String studentNumber;
     @Column(unique = true, length = 100)
     private String email;
-    private String password;// TODO. 비밀번호나 이메일은 전용 속성값 뭐 없나?
+    private String password;
     private String nickname;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uni_id")
     private Uni uni;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Board> boardList = new ArrayList<>();;
 
