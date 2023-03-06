@@ -7,16 +7,15 @@ import jakarta.persistence.Id;
 
 import java.util.List;
 
+public class Category {
 
-public class Uni {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "uni_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
     private Long id;
+
     private String name;
+    private Uni uni;
+    private List<Board> boardList;
 
-
-    private List<User> userList;
-
-    private List<Category> categoryList;
 }
