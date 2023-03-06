@@ -12,22 +12,22 @@ import java.util.List;
 
 @Entity
 @Table
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Uni {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uni_id")
     private Long id;
 
-    @Column(name = "uni_name")
+    @Column(name = "uni_name", unique = true, length = 60) // UNIQUE, 이름 길이 제한
     private String name;
 
-    @OneToMany(mappedBy = "user_id")
-    private List<User> userList = new ArrayList<>();
+    @OneToMany(mappedBy = "uni", cascade = CascadeType.ALL)
+    private List<User> userList;
 
-    @OneToMany(mappedBy = "category_id")
-    private List<Category> categoryList = new ArrayList<>();
+    @OneToMany(mappedBy = "uni", cascade = CascadeType.ALL) // 일대다
+    private List<Category> categoryList;
 
     @Builder
     public Uni(String name, List<User> userList, List<Category> categoryList) {

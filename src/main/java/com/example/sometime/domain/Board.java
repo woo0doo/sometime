@@ -6,16 +6,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Board {
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Board extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
@@ -24,7 +22,7 @@ public class Board {
     @Column(name = "board_title")
     private String title;
 
-    @Column(name = "board_content")
+    @Column(name = "board_content", columnDefinition = "TEXT")
     private String content;
 
     private boolean is_anonymous;
@@ -46,17 +44,15 @@ public class Board {
     @OneToMany(mappedBy = "userscrapboard_id")
     private List<UserScrapBoard> userScrapBoardList = new ArrayList<>();
 
-    @Builder
+    // TODO. comment count
 
-    public Board(String title, String content, boolean is_anonymous, Category category, User user, List<Comment> commentList, List<UserLikeBoard> userLikeBoardList, List<UserScrapBoard> userScrapBoardList) {
+    // 생성 메서드
+    @Builder
+    public Board(String title, String content, boolean is_anonymous, Category category, User user, List<Comment> commentList) {
         this.title = title;
         this.content = content;
         this.is_anonymous = is_anonymous;
         this.category = category;
         this.user = user;
-        this.commentList = commentList;
-        this.userLikeBoardList = userLikeBoardList;
-        this.userScrapBoardList = userScrapBoardList;
     }
-    // TODO. comment count
 }

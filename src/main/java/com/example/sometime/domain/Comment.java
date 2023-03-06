@@ -11,9 +11,9 @@ import java.util.List;
 
 @Entity
 @Table
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Comment {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Comment extends BaseTimeEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
@@ -32,16 +32,15 @@ public class Comment {
 
     private boolean is_anonymous;
 
-    @OneToMany(mappedBy = "userlikecomment_id")
-    private List<UserLikeComment> userLikeCommentList = new ArrayList<>();
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    private List<UserLikeComment> userLikeCommentList = new ArrayList<>();;
 
+    // 생성자
     @Builder
-    public Comment(String content, User user, Board board, boolean is_anonymous, List<UserLikeComment> userLikeCommentList) {
+    public Comment(String content, User user, Board board, boolean is_anonymous) {
         this.content = content;
         this.user = user;
         this.board = board;
         this.is_anonymous = is_anonymous;
-        this.userLikeCommentList = userLikeCommentList;
     }
-    // TODO. 카운트
 }
