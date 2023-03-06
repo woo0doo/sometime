@@ -1,13 +1,19 @@
 package com.example.sometime.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+@Entity
+@Table
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class User extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +21,40 @@ public class User {
     private Long id;
 
     private String name;
+
+    @Column(unique = true, length = 10)
     private String studentNumber;
+    @Column(unique = true, length = 100)
     private String email;
-    private String password;
+    private String password;// TODO. 비밀번호나 이메일은 전용 속성값 뭐 없나?
     private String nickname;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uni_id")
     private Uni uni;
-    private List<Board> boardList;
-    private List<Comment> commentList;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Board> boardList = new ArrayList<>();;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserLikeBoard> userLikeBoardList = new ArrayList<>();;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserLikeComment> userLikeCommentList = new ArrayList<>();;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserScrapBoard> userScrapBoardList = new ArrayList<>();;
+
+
+    @Builder
+    public User(String name, String studentNumber, String email, String password, String nickname, Uni uni) {
+        this.name = name;
+        this.studentNumber = studentNumber;
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.uni = uni;
+    }
 }
