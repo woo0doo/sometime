@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,19 +33,19 @@ public class User {
     private Uni uni;
 
     @OneToMany(mappedBy = "board_id")
-    private List<Board> boardList;
+    private List<Board> boardList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Comment> commentList;
+    private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "userlikeboard_id")
-    private List<UserLikeBoard> userLikeBoardList;
+    private List<UserLikeBoard> userLikeBoardList = new ArrayList<>();
 
     @OneToMany(mappedBy = "userlikecomment_id")
-    private List<UserLikeComment> userLikeCommentList;
+    private List<UserLikeComment> userLikeCommentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "userscrapboard_id")
-    private List<UserScrapBoard> userScrapBoardList;
+    private List<UserScrapBoard> userScrapBoardList = new ArrayList<>();
 
     @Builder
     public User(String name, String studentNumber, String email, String password, String nickname, Uni uni, List<Board> boardList, List<Comment> commentList, List<UserLikeBoard> userLikeBoardList, List<UserLikeComment> userLikeCommentList, List<UserScrapBoard> userScrapBoardList) {

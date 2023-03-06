@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,7 +33,7 @@ public class Comment {
     private boolean is_anonymous;
 
     @OneToMany(mappedBy = "userlikecomment_id")
-    private List<UserLikeComment> userLikeCommentList;
+    private List<UserLikeComment> userLikeCommentList = new ArrayList<>();
 
     @Builder
     public Comment(String content, User user, Board board, boolean is_anonymous, List<UserLikeComment> userLikeCommentList) {

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,10 +24,10 @@ public class Uni {
     private String name;
 
     @OneToMany(mappedBy = "user_id")
-    private List<User> userList;
+    private List<User> userList = new ArrayList<>();
 
     @OneToMany(mappedBy = "category_id")
-    private List<Category> categoryList;
+    private List<Category> categoryList = new ArrayList<>();
 
     @Builder
     public Uni(String name, List<User> userList, List<Category> categoryList) {

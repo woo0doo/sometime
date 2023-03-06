@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,13 +38,13 @@ public class Board {
     private User user;
 
     @OneToMany(mappedBy = "board")
-    private List<Comment> commentList;
+    private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "userlikeboard_id")
-    private List<UserLikeBoard> userLikeBoardList;
+    private List<UserLikeBoard> userLikeBoardList = new ArrayList<>();
 
     @OneToMany(mappedBy = "userscrapboard_id")
-    private List<UserScrapBoard> userScrapBoardList;
+    private List<UserScrapBoard> userScrapBoardList = new ArrayList<>();
 
     @Builder
 
