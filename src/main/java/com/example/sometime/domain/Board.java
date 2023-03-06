@@ -5,23 +5,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.sql.Blob;
 import java.util.List;
 
-public class User {
+public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "board_id")
     private Long id;
 
-    private String name;
-    private String studentNumber;
-    private String email;
-    private String password;
-    private String nickname;
+    private String title;
 
-    private Uni uni;
-    private List<Board> boardList;
+    private String content;
+
+    private boolean is_anonymous;
+    private Category category;
+    private User user;
     private List<Comment> commentList;
 
+    // TODO. comment count
 }
