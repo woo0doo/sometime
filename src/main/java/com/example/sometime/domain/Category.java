@@ -1,12 +1,17 @@
 package com.example.sometime.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Entity
+@Table
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Category {
 
     @Id
@@ -15,7 +20,17 @@ public class Category {
     private Long id;
 
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Uni uni;
+
+    @OneToMany(mappedBy = "board_id")
     private List<Board> boardList;
 
+    @Builder
+    public Category(String name, Uni uni, List<Board> boardList) {
+        this.name = name;
+        this.uni = uni;
+        this.boardList = boardList;
+    }
 }
