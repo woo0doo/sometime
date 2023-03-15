@@ -29,17 +29,21 @@ public class Comment extends BaseTimeEntity  {
     @JoinColumn(name = "board_id")
     private Board board;
 
-    private boolean is_anonymous;
+    private Boolean is_anonymous;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserLikeComment> userLikeCommentList = new ArrayList<>();;
 
     // 생성자
     @Builder
-    public Comment(String content, User user, Board board, boolean is_anonymous) {
+    public Comment(String content, User user, Board board, Boolean is_anonymous) {
         this.content = content;
         this.user = user;
         this.board = board;
         this.is_anonymous = is_anonymous;
+
+        //연관 관계
+        user.getCommentList().add(this);
+        board.getCommentList().add(this);
     }
 }

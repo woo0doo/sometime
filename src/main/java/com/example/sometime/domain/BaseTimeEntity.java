@@ -1,5 +1,6 @@
 package com.example.sometime.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseTimeEntity {// BaseTimeEntity : 모든 Entity의 상위클래스가 되어, Entity들의 createDate, modifiedDate 틀이 되는 역할. 반복을 줄여줌!
     @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate

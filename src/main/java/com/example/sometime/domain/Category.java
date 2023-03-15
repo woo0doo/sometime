@@ -26,13 +26,14 @@ public class Category {
     @JoinColumn(name = "uni_id")
     private Uni uni;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL) // 일대다. 주인은 Order.
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Board> boardList = new ArrayList<>();;
 
     @Builder
-    public Category(String name, Uni uni, List<Board> boardList) {
+    public Category(String name, Uni uni) {
         this.name = name;
         this.uni = uni;
-        this.boardList = boardList;
+
+        uni.getCategoryList().add(this);
     }
 }

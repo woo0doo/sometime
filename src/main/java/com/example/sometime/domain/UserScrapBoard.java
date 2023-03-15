@@ -30,5 +30,9 @@ public class UserScrapBoard {
     public UserScrapBoard(User user, Board board) {
         this.user = user;
         this.board = board;
+
+        //연관 관계 매서드
+        user.getUserScrapBoardList().add(this);
+        board.getUserScrapBoardList().add(this);
     }
 }

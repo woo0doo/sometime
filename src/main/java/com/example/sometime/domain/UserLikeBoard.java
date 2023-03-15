@@ -29,5 +29,8 @@ public class UserLikeBoard {
     public UserLikeBoard(User user, Board board) {
         this.user = user;
         this.board = board;
+
+        user.getUserLikeBoardList().add(this);      //연관 관계 메서드
+        board.getUserLikeBoardList().add(this);
     }
 }

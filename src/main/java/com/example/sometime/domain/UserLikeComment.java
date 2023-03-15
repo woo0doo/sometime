@@ -29,5 +29,9 @@ public class UserLikeComment {
     public UserLikeComment(User user, Comment comment) {
         this.user = user;
         this.comment = comment;
+
+        //연관 관계 매서드
+        user.getUserLikeCommentList().add(this);
+        comment.getUserLikeCommentList().add(this);
     }
 }

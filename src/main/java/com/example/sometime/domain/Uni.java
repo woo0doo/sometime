@@ -23,16 +23,14 @@ public class Uni {
     @Column(name = "uni_name", unique = true, length = 60) // UNIQUE, 이름 길이 제한
     private String name;
 
-    @OneToMany(mappedBy = "uni", cascade = CascadeType.ALL)
-    private List<User> userList;
+    @OneToMany(mappedBy = "uni", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<User> userList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "uni", cascade = CascadeType.ALL) // 일대다
-    private List<Category> categoryList;
+    @OneToMany(mappedBy = "uni", cascade = CascadeType.ALL, orphanRemoval = true) // 일대다
+    private List<Category> categoryList = new ArrayList<>();
 
     @Builder
-    public Uni(String name, List<User> userList, List<Category> categoryList) {
+    public Uni(String name) {
         this.name = name;
-        this.userList = userList;
-        this.categoryList = categoryList;
     }
 }
